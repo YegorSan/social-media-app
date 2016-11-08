@@ -1,0 +1,33 @@
+<div class="row profile">
+    <div class="col-sm-4 col-md-3">
+        
+        <h1><%= @user.profile_name %></h1>
+        <ul>
+            <%= content_tag(:li, ("Full name: " + @user.fullname)) unless @user.fullname.blank? %>
+           
+        </ul>
+    </div>
+    <div class="feed">
+        <h3>Social Feed Coming</h3>
+        <h2>Friends</h2>
+<ul>
+    
+    
+  <% for friendship in @user.friendships %>
+    <li>
+      <%=h friendship.friend.fullname %>
+      (<%= link_to "remove", friendship, :method => :delete %>)
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to "Find Friends", users_path %></p>
+
+<h2>Friended by Users</h2>
+<ul>
+  <% for user in @user.inverse_friends %>
+    <li><%=h user.fullname %></li>
+  <% end %>
+</ul>
+    </div>
+</div>
